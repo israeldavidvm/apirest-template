@@ -1,0 +1,76 @@
+#Token 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+### Authenticates a user and generate a Bearer Token
+POST http://127.0.0.1:80/api/v2/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "israeldavidvm@gmail.com",
+    "password": "Password1234."
+}
+
+
+### Retrieve authenticated user data.
+POST http://127.0.0.1:80/api/v2/auth/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+
+### Log out.
+POST http://127.0.0.1:80/api/v2/auth/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+### Create a new user.
+POST http://127.0.0.1:80/api/v2/auth/register
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+{
+    "name": "John Doe Michael",
+    "email": "michael@gmail.com",
+    "password":"Password123."
+}
+
+
+#Token 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+### Authenticates a user and generate a Bearer Token
+POST http://127.0.0.1:80/api/v1/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "israeldavidvm@gmail.com",
+    "password": "Password1234."
+}
+
+
+### Retrieve authenticated user data.
+POST http://127.0.0.1:80/api/v1/auth/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+
+### Log out.
+POST http://127.0.0.1:80/api/v1/auth/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+### Create a new user.
+POST http://127.0.0.1:80/api/v1/auth/register
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 33|VOSV61Z5GLfQKT5ZQuzQJKVLvR5SBlgdWbHWXAQF7e0b573c
+
+{
+    "name": "John Doe Michael",
+    "email": "michael@gmail.com",
+    "password":"Password123."
+}
