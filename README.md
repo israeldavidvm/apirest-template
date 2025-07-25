@@ -137,8 +137,6 @@ Para tener acceso a la api debes de logearte con un usuario.
 Para pruebas con la api se creo un usuario con las siguientes credenciales
 un email "israeldavidvm@gmail.com" y password de "Password1234."
 
-![alt text](image-2.png)
-
 #### Consume la api
 
 Puedes acceder a la api por medio de tu cliente http/https favorito postman, curl etc 
@@ -148,14 +146,13 @@ Puedes acceder a la api por medio de tu cliente http/https favorito postman, cur
 El proyecto tiene un archivo de nombre request.http que puede ser usado para probar la api usando la extension de rest client
 
 #### consumo de la api mediante swagger
-![alt text](image-3.png)
+![alt text](image-1.png)
 
 #### consumo de la api mediante postman
-![alt text](image-3.png)
 
-![alt text](image-4.png)
+![alt text](image.png)
 
-## Engineer Decicions
+## Engineering decisions
 
 ### Planificación, Ingeniería de Requerimientos y Gestión de Riesgos
 
