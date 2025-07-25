@@ -212,13 +212,13 @@ Las decisiones tecnicas se van a registrar por medio del Registros de desicion (
 #### Diseño de Base de Datos
 
 Diagrama para pgmodeler
-[text](documentation/diagrams/database/RelationalModel.dbm)
+[Diagrama para pgmodeler](documentation/diagrams/database/RelationalModel.dbm)
 
 #### Perspectiva Estructural
 
 ##### Diagrama vista Lógica de la Arquitectura del Software para el Attributes Trait
 
-[text](documentation/diagrams/StructuralPerspective/LogicViewAttributesTrait.md)
+[Diagrama vista Lógica de la Arquitectura del Software para el Attributes Trait](documentation/diagrams/StructuralPerspective/LogicViewAttributesTrait.md)
 
 #### Perspectiva de comportamiento
 
