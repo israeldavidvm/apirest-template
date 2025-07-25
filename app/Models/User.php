@@ -35,8 +35,6 @@ use Illuminate\Support\MessageBag;
 class User extends Authenticatable
 {
 
-    use \Israeldavidvm\EloquentTraits\AttributesTrait;
-
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
@@ -58,60 +56,5 @@ class User extends Authenticatable
         'remember_token'
     ];
 
-	public function initAttributes($attributes) {
-
-		$this->name=$attributes['name'];
-        $this->email=$attributes['email'];
-        $this->password=$attributes['password'];
-      
-    }
-
-	public static function validateAttributes (array $arrayattributes):  ?MessageBag {
-
-        $rules = [
-            'email' => [
-                'required',
-                'max:255',
-                'email:dns,rfc', // Formato de email válido
-            ],
-            'password' => [
-                'required',
-                'max:255',
-                'min:8',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.$%@!&*+]).*$/',
-            ],
-            'action' => [
-                'required',
-                Rule::in(['login', 'create', 'update', 'updateOrCreate']),
-            ]
-        ];
-
-        $validator = Validator::make($arrayattributes, $rules);
-
-        // Validación condicional para login
-        $validator->sometimes('email', 'exists:users,email', function ($input) {
-            return strtolower($input->action) === 'login';
-        });
-
-        // Validación condicional para crear usuario
-        $validator->sometimes('name', ['required', 'max:255'], function ($input) {
-            return strtolower($input->action) === 'create';
-        });
-
-        $validator->sometimes('email', 'unique:users,email', function ($input) {
-            return strtolower($input->action) === 'create';
-        });
-
-        // Validación condicional para actualizar usuario
-        $validator->sometimes('name', 'max:255', function ($input) {
-            return in_array(strtolower($input->action), ['update', 'updateOrCreate']);
-        });
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        return null;
-    }
 
 }

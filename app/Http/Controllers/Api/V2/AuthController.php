@@ -131,7 +131,7 @@ class AuthController extends Controller
     {
         return response()->json([
             "message" => "Se logró recuperar los datos del usuario de forma satisfactoria",
-            "userData" => Auth::user()
+            "userData" => new UserResource(Auth::user())
         ], 200);
     }
 
@@ -236,8 +236,12 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request): JsonResponse
     {    
 
+        $data=$request->all();
+
         $user = new User();
-        $user->initAttributes($request->all());
+        $user->name=$data['name'];
+        $user->email=$data['email'];
+        $user->password=$data['password'];
         $user->save();
 
         return response()->json([

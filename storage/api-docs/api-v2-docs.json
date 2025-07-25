@@ -334,6 +334,11 @@
                         "type": "string",
                         "example": "user@example.com"
                     },
+                    "email_verified_at": {
+                        "description": "The email verification timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
                     "created_at": {
                         "description": "Creation date of the user",
                         "type": "string",

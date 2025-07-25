@@ -31,18 +31,29 @@ Un punto de partida limpio y optimizado, incluyendo las configuraciones esencial
 
 Incluye los archivos .http (para la extensión REST Client de VS Code) pre-configurados para probar los endpoints de autenticación de forma inmediata.
 
+## Características a implementar
+
+
 ## Licencia
 
 Este código tiene licencia bajo la licencia pública general de GNU versión 3.0 o posterior (LGPLV3+). Puedes encontrar una copia completa de la licencia en https://www.gnu.org/licenses/lgpl-3.0-standalone.html
 
-## Características ¿Qué te ofrece api-productos?
-
-
-## Características a implementar
-
-
-
 ## Uso
+
+Esta plantilla tiene 2 enfoques para manejar las validaciones he inicializacion de attributos. Dichos enfoques deben de ser selecionados dependiendo de los estandares del proyecto en el que se trabaje
+
+1. Uso de Metodos con interfaces estandarizadaspor medio de Traits
+Dicho enfoque sera el usado en la version 1 de la api y por consiguiente los controladores, test y demas elementos asociados 
+
+2. Uso de Form Request
+Dicho enfoque sera el usado en la version 2 de la api y por consiguiente los controladores, test y demas elementos asociados 
+
+Para no ensuciar el model User se crearon 2 modelos
+
+UserWithTrait que sera el destinado a ser usado por el enfoque #1 y el User que sera destinado a ser usado por el enfoque #2
+
+### ADVAERTENCIA
+A pesar de que el proyecto incluya los 2 enfoques para facilitar la eleccion dependiendo del caso en un proyecto se recomienda utilizar 1 solo de los enfoques para evitar confusiones
 
 ### Requisitos 
 
@@ -106,7 +117,11 @@ accede a la documentacion de la api
 
 por medio de la url
 
-http://127.0.0.1:80/api/documentation
+http://127.0.0.1:80/api/v1/documentation
+
+por medio de la url
+
+http://127.0.0.1:80/api/v2/documentation
 
 
 #### Acceso a la api 
@@ -185,17 +200,13 @@ classDiagram
 
 ## Desiciones tecnicas
 
-Con el objetivo de estandarizar el comportamiento de varios de los modelos se definio el trait israeldavidvm/eloquent-traits/src/AttributesTrait.php
+Las decisiones tecnicas se van a registrar por medio del Registros de desicion (Decission Records), y estaran almacenados en el directorio
 
-El cual trae 2 metodos consigo el
+```documentation/DR```
 
-abstract public static function validateAttributes(array $arrayAttributes): ?MessageBag;
+[Estandarización de la Validación e Inicialización de Atributos de Modelos con un Trait](<documentation/DR/DR-01: Estandarización de la Validación e Inicialización de Atributos de Modelos con un Trait.md>)
 
-Que permite validar los attributos que se van a asignar a un modelo, no repetir la logica y no depender de una Form Request Validation, cosa ventajosa en caso de querer crear una vista utilizando tecnologias como livewire o fillament
-
-abstract public function initAttributes(array $arrayAttributes);
-
-Que permite encapsular la logica de inicializacion de attributos para un modelo
+[Soporte a metodologias tradicionales sin el trair](<documentation/DR/DR-02: Soporte a metodologias tradicionales sin el trair.md>)
 
 
 ## Verification and Validation / Validacion y Verificacion

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+
+use App\Http\Resources\UserResource;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use Exception;
+use App\Models\UserWithTrait as User;
 use Illuminate\Support\Facades\Validator;
-use OpenApi\Attributes as OA;
 
 class AuthController extends Controller
 {
@@ -80,7 +83,7 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => "Inicio de sesión exitoso",
-            'userData' => $user,
+            'userData' => new UserResource($user),
             'access_token' => $token,
             'type_token' => "Bearer",
         ], 200);
@@ -118,7 +121,7 @@ class AuthController extends Controller
     {
         return response()->json([
             "message" => "Se logró recuperar los datos del usuario de forma satisfactoria",
-            "userData" => Auth::user()
+            "userData" => new UserResource(Auth::user())
         ], 200);
     }
 
@@ -240,7 +243,7 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'User created successfully',
-            'data' => $user
+            'data' => new UserResource($user)
         ], 201);
     }
 }
