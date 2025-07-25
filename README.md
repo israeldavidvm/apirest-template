@@ -55,6 +55,8 @@ UserWithTrait que sera el destinado a ser usado por el enfoque #1 y el User que 
 ### ADVAERTENCIA
 A pesar de que el proyecto incluya los 2 enfoques para facilitar la eleccion dependiendo del caso en un proyecto se recomienda utilizar 1 solo de los enfoques para evitar confusiones
 
+## Getting Started
+
 ### Requisitos 
 
 Tener instalado 
@@ -62,11 +64,16 @@ Tener instalado
 - composer
 - Docker
 
+### Clonar el Repositorio
+
+git clone https://github.com/israeldavidvm/apirest-template.git
+
 ### Instalacion 
 
 Ejecuta el comando para instalar laravel sail, sactum y las demas depencias
+composer install
 
-composer install  
+sail artisan key:generate
 
 #### Docker
 El proceso de instalacion esta gestionado por laravel sail mas concretamente por medio de docker-compose.yml
@@ -124,7 +131,7 @@ por medio de la url
 http://127.0.0.1:80/api/v2/documentation
 
 
-#### Acceso a la api 
+### Acceso a la api 
 
 Para tener acceso a la api debes de logearte con un usuario. 
 Para pruebas con la api se creo un usuario con las siguientes credenciales
@@ -148,57 +155,51 @@ El proyecto tiene un archivo de nombre request.http que puede ser usado para pro
 
 ![alt text](image-4.png)
 
-## Planificación, Ingeniería de Requerimientos y Gestión de Riesgos
+## Engineer Decicions
+
+### Planificación, Ingeniería de Requerimientos y Gestión de Riesgos
 
 Estas secciones del proyecto se llevarán a cabo mediante un sitio en Notion, de forma que puedan ser fácilmente accesibles por el personal no técnico.
 
 Solicita el link de acceso al personal autorizado.
 
-## Diseño de Software
+### Folder Structured
 
-### Perspectiva Estructural
+La estructura del proyecto va a seguir las convenciones de laravel 11 he incoporara los siguientes directorios y archivos
 
-#### Vista Lógica de la Arquitectura del Software
+#### /israeldavidvm 
 
-``` mermaid
-classDiagram
-    direction LR
+Para la incoporacion de codigo que se planea convertir a librerias o paquetes
 
-    class AttributesTrait {
-        <<trait>>
-        +validateAttributes(array arrayAttributes): MessageBag | null
-        +initAttributes(array arrayAttributes): void
-    }
+#### /documentation
 
-    class ConcreteModelA {
-        // Specific properties for Model A
-        -id: int
-        -name: string
-        -email: string
-        // ...
-        +validateAttributes(array arrayAttributes): MessageBag | null
-        +initAttributes(array arrayAttributes): void
-    }
+Directorio que almacena toda la documentacion del proyecto que no se incluyo en el readme para no ser tan extensiva su extension
 
-    class MessageBag {
-        // Represents validation error collection
-        +add(key, message): void
-        +get(key): array
-        // ...
-    }
+#### /documentation/diagrams
 
-    AttributesTrait <|..  ConcreteModelA : uses
+Directorio que almacena los diagramas que serta usados durante el proyecto como MER, Modelo relacional, diagramas de aquitectura etc
 
-    AttributesTrait --> MessageBag : returns
-    ConcreteModelA ..> MessageBag : uses (for validation result)
+#### /documentation/DR
 
-```
+Directorio donde seran almacenados los Registros de desicion (Decission Records) utilizados para registrar las decisiones tecnicas
 
-### Perspectiva de comportamiento
+#### /request.http
 
-### Diseño de Base de Datos
+Contiene un archivo que puede usarse para probar las api por medio de rest client
 
-## Desiciones tecnicas
+#### app/Swagger
+
+Se utiliza para almacenar elementos utilizados par ala generacion de documentacion por medio de open api (anteriormente conocida como swagger)
+
+##### app/Swagger/ShareBase.php
+
+Contiene elementos que se compartiran entre distintas versiones de las apis
+
+##### app/Swagger/V1, app/Swagger/V2, ...
+
+Contieme elementos especificos para cada version de la api que no seran incorporados directamente en las ubicaciones usuales como controladores
+
+### Desiciones tecnicas
 
 Las decisiones tecnicas se van a registrar por medio del Registros de desicion (Decission Records), y estaran almacenados en el directorio
 
@@ -209,9 +210,28 @@ Las decisiones tecnicas se van a registrar por medio del Registros de desicion (
 [Soporte a metodologias tradicionales sin el trair](<documentation/DR/DR-02: Soporte a metodologias tradicionales sin el trair.md>)
 
 
-## Verification and Validation / Validacion y Verificacion
+### Diseño de Software
 
-# Ejecucion de test
+#### Diseño de Base de Datos
+
+Diagrama para pgmodeler
+[text](documentation/diagrams/database/RelationalModel.dbm)
+
+#### Perspectiva Estructural
+
+##### Diagrama vista Lógica de la Arquitectura del Software para el Attributes Trait
+
+[text](documentation/diagrams/StructuralPerspective/LogicViewAttributesTrait.md)
+
+#### Perspectiva de comportamiento
+
+### Verification and Validation / Validacion y Verificacion
+
+#### Test
+
+Los test seran realizados por medio de PHP Unit
+
+##### Ejecucion de test
 ```
 sail test
 ```
