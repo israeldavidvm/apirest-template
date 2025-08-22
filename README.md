@@ -214,13 +214,18 @@ Las decisiones tecnicas se van a registrar por medio del Registros de desicion (
 Diagrama para pgmodeler
 [Diagrama para pgmodeler](documentation/diagrams/database/RelationalModel.dbm)
 
-#### Perspectiva Estructural
+#### Diseño AttributesTrait
 
-##### Diagrama vista Lógica de la Arquitectura del Software para el Attributes Trait
+##### Diagrama vista Lógica para el Attributes Trait
 
 [Diagrama vista Lógica de la Arquitectura del Software para el Attributes Trait](documentation/diagrams/StructuralPerspective/LogicViewAttributesTrait.md)
 
-#### Perspectiva de comportamiento
+##### Perspectiva de interacion
+
+Si se desea modificar los attributos de un modelo se debe de usar el initAttributes()
+
+Si se desea validar que un conjunto de attributos(representado array asociativo) es valido para realizar una operacion(crear, actualizar, eliminar) sobre una intancia de determinado modelo se debe generar un validador con generateValidator, el cual retornara una instancia de Illuminate\Validation\Validator, de manera que podremos aprovechar todos los metodos del mismo como validate(), ...
+
 
 ### Verification and Validation / Validacion y Verificacion
 

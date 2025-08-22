@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Validator as ValidatorInstance;
 use Illuminate\Validation\Rule;
 use Exception;
 use Filament\Models\Contracts\FilamentUser;
@@ -66,7 +67,7 @@ class UserWithTrait extends Authenticatable
       
     }
 
-	public static function validateAttributes (array $arrayattributes):  ?MessageBag {
+	public static function generateValidator (array $arrayattributes): ValidatorInstance {
 
         $rules = [
             'email' => [
@@ -107,11 +108,7 @@ class UserWithTrait extends Authenticatable
             return in_array(strtolower($input->action), ['update', 'updateOrCreate']);
         });
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        return null;
+        return $validator;
     }
 
 }

@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\UserWithTrait as User;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Validation\Validator as ValidatorInstance;
+
+
 class AuthController extends Controller
 {
     #[OA\Post(
@@ -64,14 +67,7 @@ class AuthController extends Controller
 
         $request['action'] = 'login';
         
-        $errors=User::validateAttributes($request->all());
-        
-        if($errors!=null){
-            return response()->json([
-                'message' => 'Revise los datos ingresados',
-                'errors' => $errors
-            ], 422);
-        }
+        User::generateValidator($request->all())->validate();
 
         $user = User::firstWhere('email', $credentials['email']);
 
@@ -227,16 +223,8 @@ class AuthController extends Controller
     {
         $request['action'] = 'create';
         
-        $errors=User::validateAttributes($request->all());
-        
-        if($errors!=null){
-            return response()->json([
-                'message' => 'No se pudo crear el usuario, revise los datos ingresados',
-                'errors' => $errors
-            ], 422);
-        }
-    
-
+        $errors=User::generateValidator($request->all())->validate();
+      
         $user = new User();
         $user->initAttributes($request->all());
         $user->save();
