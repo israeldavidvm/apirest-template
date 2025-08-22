@@ -2,7 +2,8 @@
 
 namespace Israeldavidvm\EloquentTraits;
 
-use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Validator as ValidatorInstance;
 
 trait AttributesTrait
 {
@@ -17,7 +18,7 @@ trait AttributesTrait
      * @return \Illuminate\Support\MessageBag|null Returns a `MessageBag` instance with validation errors if they occur,
      * or `null` if the validation is successful.
      */
-    abstract public static function validateAttributes(array $arrayAttributes): ?MessageBag;
+    abstract public static function  generateValidator(array $arrayAttributes): ValidatorInstance;
 
     /**
      * Initializes and encapsulates the attribute assignment logic for the model.

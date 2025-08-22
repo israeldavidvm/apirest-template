@@ -29,7 +29,7 @@ Se consideraron las siguientes opciones para abordar el problema:
 -   **Opción 2: Implementación de Lógica en los Propios Modelos sin Trait:** Mover la validación e inicialización directamente a métodos estáticos o de instancia en cada modelo Eloquent.
     * **Breve descripción:** Los modelos tendrían métodos como `validate()` o `initialize()` directamente definidos en ellos.
 -   **Opción 3: Uso de `AttributesTrait` (Opción Elegida):** Definir un trait que encapsule la interfaz y la lógica común para la validación e inicialización de atributos.
-    * **Breve descripción:** Creación de un `AttributesTrait` (`israeldavidvm/eloquent-traits/src/AttributesTrait.php`) que proporciona métodos abstractos `validateAttributes` y `initAttributes` para ser implementados por los modelos que lo usen.
+    * **Breve descripción:** Creación de un `AttributesTrait` (`israeldavidvm/eloquent-traits/src/AttributesTrait.php`) que proporciona métodos abstractos `generateValidator` y `initAttributes` para ser implementados por los modelos que lo usen.
 
 ---
 
@@ -41,9 +41,9 @@ Se consideraron las siguientes opciones para abordar el problema:
 
 Esta opción fue seleccionada por las siguientes razones fundamentales:
 
--   **Estandarización y Consistencia:** El trait impone una interfaz común (`validateAttributes` y `initAttributes`) que cada modelo que lo utiliza debe implementar. Esto garantiza que la lógica de validación e inicialización se aborde de manera uniforme en toda la aplicación.
+-   **Estandarización y Consistencia:** El trait impone una interfaz común (`generateValidator` y `initAttributes`) que cada modelo que lo utiliza debe implementar. Esto garantiza que la lógica de validación e inicialización se aborde de manera uniforme en toda la aplicación.
 -   **Eliminación de Duplicidad:** Al centralizar la definición de la interfaz en un trait, se evita la repetición de la lógica de validación e inicialización a lo largo de la base de código. Cada modelo implementará la lógica específica para sus propios atributos, pero siguiendo una plantilla común.
--   **Desacoplamiento de `Form Request Validation`:** El método `validateAttributes` devuelve un `MessageBag` (o `null` si es exitoso), lo que permite que la validación se realice de forma independiente de una `Form Request`. Esto es ventajoso para:
+-   **Desacoplamiento de `Form Request Validation`:** El método `generateValidator` devuelve un `validator`, lo que permite que la validación se realice de forma independiente de una `Form Request`. Esto es ventajoso para:
     * **Uso en Tareas de Consola/Jobs:** Permite validar datos antes de procesarlos en un contexto CLI o asíncrono.
     * **Interfaces Reactivas (Livewire/Filament):** La validación puede ejecutarse en el backend sin la necesidad de un ciclo de solicitud/respuesta HTTP completo, facilitando la validación en tiempo real y la retroalimentación al usuario.
 -   **Encapsulación de Lógica:** El método `initAttributes` encapsula la lógica de inicialización y transformación de atributos para un modelo. Esto mantiene el código limpio y organizado, ya que la lógica de preparación de los datos se encuentra junto con la definición de los datos.

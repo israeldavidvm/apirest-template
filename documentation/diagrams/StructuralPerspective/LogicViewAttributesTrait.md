@@ -5,7 +5,7 @@ classDiagram
 
     class AttributesTrait {
         <<trait>>
-        +validateAttributes(array arrayAttributes): MessageBag | null
+        +generateValidator(array arrayAttributes): Validator
         +initAttributes(array arrayAttributes): void
     }
 
@@ -15,20 +15,17 @@ classDiagram
         -name: string
         -email: string
         // ...
-        +validateAttributes(array arrayAttributes): MessageBag | null
+        +generateValidator(array arrayAttributes): Validator
         +initAttributes(array arrayAttributes): void
     }
 
-    class MessageBag {
-        // Represents validation error collection
-        +add(key, message): void
-        +get(key): array
-        // ...
+    class Validator {
+
     }
 
     AttributesTrait <|..  ConcreteModelA : uses
 
-    AttributesTrait --> MessageBag : returns
-    ConcreteModelA ..> MessageBag : uses (for validation result)
+    AttributesTrait --> Validator : returns
+    ConcreteModelA ..> Validator : uses (for validation result)
 
 ```
